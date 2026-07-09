@@ -9,7 +9,7 @@ import {
   Platform,
   Share,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, radius, spacing } from '../theme/colors';
 import { fabElevation, fabElevationPressed } from '../theme/elevation';
@@ -31,6 +31,7 @@ interface HomeScreenProps {
 
 export function HomeScreen({ subscriptions, onSelect, onAdd }: HomeScreenProps) {
   const { vndRates, lastUpdated, source } = useExchangeRates();
+  const insets = useSafeAreaInsets();
 
   const sorted = [...subscriptions].sort(sortByNextDue);
 
@@ -111,18 +112,23 @@ export function HomeScreen({ subscriptions, onSelect, onAdd }: HomeScreenProps) 
         <View style={styles.bottomSpacer} />
       </ScrollView>
 
-      <Pressable
-        onPress={onAdd}
-        style={({ pressed }) => [
-          styles.fab,
-          fabElevation,
-          pressed && fabElevationPressed,
-          pressed && styles.fabPressed,
-        ]}
-        accessibilityLabel="Thêm subscription"
+      <View
+        pointerEvents="box-none"
+        style={[styles.fabContainer, { bottom: insets.bottom + spacing.lg }]}
       >
-        <Ionicons name="add" size={28} color={colors.black} />
-      </Pressable>
+        <Pressable
+          onPress={onAdd}
+          style={({ pressed }) => [
+            styles.fab,
+            fabElevation,
+            pressed && fabElevationPressed,
+            pressed && styles.fabPressed,
+          ]}
+          accessibilityLabel="Thêm subscription"
+        >
+          <Ionicons name="add" size={22} color={colors.black} />
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
@@ -211,12 +217,15 @@ const styles = StyleSheet.create({
   bottomSpacer: {
     height: 88,
   },
-  fab: {
+  fabContainer: {
     position: 'absolute',
-    right: spacing.xl,
-    bottom: spacing.xxl,
-    width: 52,
-    height: 52,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  fab: {
+    width: 44,
+    height: 44,
     borderRadius: radius.pill,
     backgroundColor: colors.primary,
     alignItems: 'center',
