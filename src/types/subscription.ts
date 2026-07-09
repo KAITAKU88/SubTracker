@@ -1,4 +1,3 @@
-import { BillingCycle } from './subscription';
 export type { Currency, CoreCurrency } from './currency';
 export { CURRENCY_PRIORITY, currencySymbols, getCurrencyLabel, getCurrencySymbol } from './currency';
 

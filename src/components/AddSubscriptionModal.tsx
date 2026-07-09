@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
     padding: spacing.xl,
   },
   backdrop: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: colors.overlay,
   },
   sheet: {
@@ -369,7 +369,7 @@ const styles = StyleSheet.create({
     }),
   },
   pickerBackdrop: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 50,
   },
   floatingMenu: {

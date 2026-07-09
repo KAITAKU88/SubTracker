@@ -37,7 +37,7 @@ export function sortByNextDue(a: Subscription, b: Subscription): number {
 }
 
 export function migrateSubscription(raw: Record<string, unknown>): Subscription {
-  const legacy = raw as Subscription & { nextDueDate?: string };
+  const legacy = raw as unknown as Subscription & { nextDueDate?: string };
   return {
     id: String(legacy.id),
     name: String(legacy.name),
