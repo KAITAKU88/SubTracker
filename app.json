@@ -2,7 +2,7 @@
   "expo": {
     "name": "SubTracker",
     "slug": "subtracker",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "platforms": [
       "android"
     ],
@@ -17,7 +17,7 @@
     },
     "android": {
       "package": "com.subtracker.app",
-      "versionCode": 4,
+      "versionCode": 5,
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
