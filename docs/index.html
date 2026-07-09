@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SubTracker — theo dõi subscription đơn giản, miễn phí trên Android." />
+  <meta property="og:title" content="SubTracker" />
+  <meta property="og:description" content="Theo dõi chi phí subscription hàng tháng — miễn phí, không quảng cáo." />
+  <meta property="og:type" content="website" />
+  <title>SubTracker — Theo dõi subscription miễn phí</title>
+  <link rel="icon" href="assets/icon.png" type="image/png" />
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #1a1a1e;
+      --surface-elevated: #222228;
+      --border: #2a2a32;
+      --primary: #9d7bff;
+      --primary-muted: rgba(157, 123, 255, 0.15);
+      --text: #ffffff;
+      --text-secondary: #8b8b96;
+      --text-muted: #5c5c66;
+      --success: #4ade80;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .app-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      margin: 0 auto 20px;
+      display: block;
+      box-shadow: 0 16px 48px rgba(157, 123, 255, 0.25);
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      color: var(--text-secondary);
+      font-size: 16px;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--primary);
+      color: #000;
+      font-size: 17px;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s, opacity 0.15s;
+      margin-bottom: 12px;
+    }
+
+    .download-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .download-btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    .download-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--primary-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .donate-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .donate-card:hover {
+      background: var(--surface-elevated);
+    }
+
+    .donate-emoji {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--primary-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .donate-text { flex: 1; }
+
+    .donate-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .donate-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .qr-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+    }
+
+    .qr-modal.open { display: flex; }
+
+    .qr-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .qr-box img {
+      width: 100%;
+      border-radius: 12px;
+      margin: 16px 0;
+    }
+
+    .qr-close {
+      margin-top: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">SUBTRACK</p>
+      <img class="app-icon" src="assets/icon.png" alt="SubTracker icon" width="88" height="88" />
+      <h1>SubTracker</h1>
+      <p class="tagline">Theo dõi chi phí subscription hàng tháng — đơn giản, miễn phí, không quảng cáo.</p>
+    </header>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-value" id="download-count">—</div>
+        <div class="stat-label">Lượt tải về</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="active-count">—</div>
+        <div class="stat-label">Người đang dùng</div>
+      </div>
+    </div>
+
+    <a class="download-btn" id="download-btn" href="#" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Tải APK miễn phí
+    </a>
+    <p class="download-note">Android · Cài trực tiếp từ file APK</p>
+
+    <section class="features" aria-label="Tính năng">
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <div>
+          <div class="feature-title">Tổng chi phí hàng tháng</div>
+          <div class="feature-desc">Quy đổi tự động sang VND với tỷ giá cập nhật.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⏰</div>
+        <div>
+          <div class="feature-title">Nhắc ngày gia hạn</div>
+          <div class="feature-desc">Biết subscription nào sắp đến hạn trước khi bị trừ tiền.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <div>
+          <div class="feature-title">Dữ liệu trên máy bạn</div>
+          <div class="feature-desc">Không cần đăng ký, không thu thập dữ liệu cá nhân.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="donate-card" id="donate-btn" role="button" tabindex="0" aria-label="Buy my wife a Trà Sữa">
+      <div class="donate-emoji">🧋</div>
+      <div class="donate-text">
+        <div class="donate-title">Buy my wife a Trà Sữa</div>
+        <div class="donate-sub">App free — quét MoMo nếu bạn thấy hữu ích</div>
+      </div>
+      <span aria-hidden="true">▸</span>
+    </div>
+
+    <footer class="footer">
+      SubTracker · Miễn phí mãi mãi
+    </footer>
+  </div>
+
+  <div class="qr-modal" id="qr-modal" role="dialog" aria-modal="true" aria-label="Mã QR MoMo">
+    <div class="qr-box">
+      <div class="donate-title">Buy my wife a Trà Sữa 🧋</div>
+      <img src="assets/momo-qr.jpg" alt="Mã QR MoMo" />
+      <button class="qr-close" id="qr-close" type="button">Đóng</button>
+    </div>
+  </div>
+
+  <script>
+    const CONFIG = {
+      apkUrl: 'https://github.com/KAITAKU88/SubTracker/releases/latest/download/subtracker.apk',
+      countApiNamespace: 'subtracker',
+    };
+
+    const downloadBtn = document.getElementById('download-btn');
+    const downloadCountEl = document.getElementById('download-count');
+    const activeCountEl = document.getElementById('active-count');
+    const donateBtn = document.getElementById('donate-btn');
+    const qrModal = document.getElementById('qr-modal');
+    const qrClose = document.getElementById('qr-close');
+
+    downloadBtn.href = CONFIG.apkUrl;
+
+    async function fetchCount(key) {
+      try {
+        const res = await fetch(
+          `https://api.countapi.xyz/get/${CONFIG.countApiNamespace}/${key}`
+        );
+        const data = await res.json();
+        return typeof data.value === 'number' ? data.value : 0;
+      } catch {
+        return null;
+      }
+    }
+
+    async function incrementDownload() {
+      try {
+        await fetch(
+          `https://api.countapi.xyz/hit/${CONFIG.countApiNamespace}/downloads`
+        );
+      } catch {
+        // ignore
+      }
+    }
+
+    async function loadStats() {
+      const [downloads, active] = await Promise.all([
+        fetchCount('downloads'),
+        fetchCount('active-users'),
+      ]);
+      if (downloads !== null) downloadCountEl.textContent = downloads.toLocaleString('vi-VN');
+      if (active !== null) activeCountEl.textContent = active.toLocaleString('vi-VN');
+    }
+
+    downloadBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      await incrementDownload();
+      const current = parseInt(downloadCountEl.textContent.replace(/\D/g, ''), 10) || 0;
+      downloadCountEl.textContent = (current + 1).toLocaleString('vi-VN');
+      window.location.href = CONFIG.apkUrl;
+    });
+
+    donateBtn.addEventListener('click', () => qrModal.classList.add('open'));
+    donateBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        qrModal.classList.add('open');
+      }
+    });
+    qrClose.addEventListener('click', () => qrModal.classList.remove('open'));
+    qrModal.addEventListener('click', (e) => {
+      if (e.target === qrModal) qrModal.classList.remove('open');
+    });
+
+    loadStats();
+  </script>
+</body>
+</html>

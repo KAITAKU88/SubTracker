@@ -1,0 +1,35 @@
+{
+  "name": "subtracker",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "prebuild:android": "expo prebuild --platform android --clean",
+    "build:apk": "bash scripts/build-apk.sh release",
+    "build:apk:debug": "bash scripts/build-apk.sh debug",
+    "build:apk:release": "bash scripts/build-apk.sh release",
+    "build:apk:eas-local": "eas build --platform android --profile preview --local"
+  },
+  "dependencies": {
+    "@babel/core": "^7.29.7",
+    "@expo/vector-icons": "^15.1.1",
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "babel-preset-expo": "^57.0.2",
+    "expo": "~57.0.4",
+    "expo-linear-gradient": "~15.0.0",
+    "expo-status-bar": "~57.0.0",
+    "react": "19.2.3",
+    "react-dom": "^19.2.3",
+    "react-native": "0.86.0",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  },
+  "private": true
+}
