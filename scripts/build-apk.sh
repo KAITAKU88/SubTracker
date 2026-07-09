@@ -2,6 +2,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+# shellcheck source=/dev/null
+source "$ROOT/scripts/android-env.sh"
 ANDROID_DIR="$ROOT/android"
 APK_DEBUG="$ANDROID_DIR/app/build/outputs/apk/debug/app-debug.apk"
 APK_RELEASE="$ANDROID_DIR/app/build/outputs/apk/release/app-release.apk"

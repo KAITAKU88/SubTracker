@@ -11,7 +11,9 @@
     "build:apk": "bash scripts/build-apk.sh release",
     "build:apk:debug": "bash scripts/build-apk.sh debug",
     "build:apk:release": "bash scripts/build-apk.sh release",
-    "build:apk:eas-local": "eas build --platform android --profile preview --local"
+    "build:apk:eas-local": "eas build --platform android --profile preview --local",
+    "release:apk": "bash scripts/release-apk.sh",
+    "bump-version": "node scripts/bump-version.mjs"
   },
   "dependencies": {
     "@babel/core": "^7.29.7",

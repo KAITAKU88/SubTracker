@@ -46,7 +46,7 @@ export function HomeScreen({ subscriptions, onSelect, onAdd }: HomeScreenProps) 
     try {
       await Share.share(
         Platform.OS === 'ios'
-          ? { message: SHARE_MESSAGE, url: LANDING_PAGE_URL, title: SHARE_TITLE }
+          ? { message, url: LANDING_PAGE_URL, title: SHARE_TITLE }
           : { message, title: SHARE_TITLE }
       );
     } catch {

@@ -1,5 +1,6 @@
 name: Deploy GitHub Pages
 
+# Tự deploy landing page khi push code lên main (thư mục docs/)
 on:
   push:
     branches: [main]
