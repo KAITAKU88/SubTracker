@@ -1,7 +1,7 @@
-name: Publish APK
+name: Publish APK (Android)
 
-# Bấm "Run workflow" trên GitHub → tự build APK + đăng lên Releases.
-# Link tải luôn cố định: .../releases/latest/download/subtracker.apk
+# Chỉ build APK Android — không build iOS.
+# Bấm "Run workflow" → tự build + đăng lên Releases.
 
 on:
   workflow_dispatch:
@@ -58,7 +58,7 @@ jobs:
         run: npm ci
 
       - name: Sync Android native project
-        run: npx expo prebuild --platform android
+        run: npx expo prebuild --platform android --no-install
 
       - name: Configure Android SDK path
         run: echo "sdk.dir=$ANDROID_HOME" > android/local.properties

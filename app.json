@@ -3,6 +3,7 @@
     "name": "SubTracker",
     "slug": "subtracker",
     "version": "1.0.1",
+    "platforms": ["android"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -11,9 +12,6 @@
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#0F0F12"
-    },
-    "ios": {
-      "supportsTablet": true
     },
     "android": {
       "package": "com.subtracker.app",
@@ -24,9 +22,6 @@
         "monochromeImage": "./assets/android-icon-monochrome.png",
         "backgroundColor": "#0F0F12"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       [

@@ -1,5 +1,7 @@
 # SubTracker — Hướng dẫn nhanh
 
+**Chỉ build Android** — APK cho điện thoại Android (chip arm64). Không có bản iOS.
+
 ## Đăng bản APK mới (chỉ 3 bước)
 
 1. Mở **GitHub** → repo **SubTracker** → tab **Actions**
