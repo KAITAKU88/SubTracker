@@ -78,34 +78,6 @@
       margin: 0 auto;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      text-align: center;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.2;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
     .download-btn {
       display: flex;
       align-items: center;
@@ -279,17 +251,6 @@
       <p class="tagline">Theo dõi chi phí subscription hàng tháng — đơn giản, miễn phí, không quảng cáo.</p>
     </header>
 
-    <div class="stats">
-      <div class="stat-card">
-        <div class="stat-value" id="download-count">—</div>
-        <div class="stat-label">Lượt tải về</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value" id="active-count">—</div>
-        <div class="stat-label">Người đang dùng</div>
-      </div>
-    </div>
-
     <a class="download-btn" id="download-btn" href="#" rel="noopener">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -349,63 +310,14 @@
   <script>
     const CONFIG = {
       apkUrl: 'https://github.com/KAITAKU88/SubTracker/releases/latest/download/subtracker.apk',
-      countApiNamespace: 'subtracker',
     };
 
     const downloadBtn = document.getElementById('download-btn');
-    const downloadCountEl = document.getElementById('download-count');
-    const activeCountEl = document.getElementById('active-count');
     const donateBtn = document.getElementById('donate-btn');
     const qrModal = document.getElementById('qr-modal');
     const qrClose = document.getElementById('qr-close');
 
     downloadBtn.href = CONFIG.apkUrl;
-
-    async function fetchCount(key) {
-      try {
-        const res = await fetch(
-          `https://api.countapi.xyz/get/${CONFIG.countApiNamespace}/${key}`
-        );
-        const data = await res.json();
-        return typeof data.value === 'number' ? data.value : 0;
-      } catch {
-        return null;
-      }
-    }
-
-    async function incrementDownload() {
-      try {
-        await fetch(
-          `https://api.countapi.xyz/hit/${CONFIG.countApiNamespace}/downloads`
-        );
-      } catch {
-        // ignore
-      }
-    }
-
-    async function loadStats() {
-      const [downloads, active] = await Promise.all([
-        fetchCount('downloads'),
-        fetchCount('active-users'),
-      ]);
-      if (downloads !== null) downloadCountEl.textContent = downloads.toLocaleString('vi-VN');
-      if (active !== null) activeCountEl.textContent = active.toLocaleString('vi-VN');
-    }
-
-    downloadBtn.addEventListener('click', () => {
-      const current = parseInt(downloadCountEl.textContent.replace(/\D/g, ''), 10) || 0;
-      downloadCountEl.textContent = (current + 1).toLocaleString('vi-VN');
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(
-          `https://api.countapi.xyz/hit/${CONFIG.countApiNamespace}/downloads`
-        );
-      } else {
-        incrementDownload();
-      }
-      // No preventDefault: let the browser follow the anchor's href
-      // (already set to CONFIG.apkUrl) natively and immediately, instead
-      // of waiting on a third-party analytics call before navigating.
-    });
 
     donateBtn.addEventListener('click', () => qrModal.classList.add('open'));
     donateBtn.addEventListener('keydown', (e) => {
@@ -418,8 +330,6 @@
     qrModal.addEventListener('click', (e) => {
       if (e.target === qrModal) qrModal.classList.remove('open');
     });
-
-    loadStats();
   </script>
 </body>
 </html>
