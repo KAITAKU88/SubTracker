@@ -392,12 +392,19 @@
       if (active !== null) activeCountEl.textContent = active.toLocaleString('vi-VN');
     }
 
-    downloadBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      await incrementDownload();
+    downloadBtn.addEventListener('click', () => {
       const current = parseInt(downloadCountEl.textContent.replace(/\D/g, ''), 10) || 0;
       downloadCountEl.textContent = (current + 1).toLocaleString('vi-VN');
-      window.location.href = CONFIG.apkUrl;
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(
+          `https://api.countapi.xyz/hit/${CONFIG.countApiNamespace}/downloads`
+        );
+      } else {
+        incrementDownload();
+      }
+      // No preventDefault: let the browser follow the anchor's href
+      // (already set to CONFIG.apkUrl) natively and immediately, instead
+      // of waiting on a third-party analytics call before navigating.
     });
 
     donateBtn.addEventListener('click', () => qrModal.classList.add('open'));
