@@ -2,8 +2,10 @@
   "expo": {
     "name": "SubTracker",
     "slug": "subtracker",
-    "version": "1.0.1",
-    "platforms": ["android"],
+    "version": "1.0.2",
+    "platforms": [
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -15,7 +17,7 @@
     },
     "android": {
       "package": "com.subtracker.app",
-      "versionCode": 2,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
@@ -28,7 +30,9 @@
         "expo-build-properties",
         {
           "android": {
-            "buildArchs": ["arm64-v8a"],
+            "buildArchs": [
+              "arm64-v8a"
+            ],
             "useLegacyPackaging": true,
             "networkInspector": false
           }
