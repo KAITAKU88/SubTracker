@@ -34,8 +34,6 @@
         {
           "android": {
             "buildArchs": ["arm64-v8a", "armeabi-v7a"],
-            "enableMinifyInReleaseBuilds": true,
-            "enableShrinkResourcesInReleaseBuilds": true,
             "useLegacyPackaging": true,
             "networkInspector": false
           }
